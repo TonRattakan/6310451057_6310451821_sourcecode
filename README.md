@@ -23,7 +23,6 @@ Before cloning the repository, ensure you have the following installed on your s
 
 ### Core Tools:
 - [Node.js](https://nodejs.org/en) (Includes npm)
-- [MongoDB](https://www.mongodb.com/try/download/community) (For database management)
 
 ### Optional Development Tools:
 You can use any text editor or IDE, but we recommend the following for an enhanced development experience:
@@ -50,10 +49,8 @@ For managing your database and local web server more efficiently, consider insta
     ```bash
     npm install
     ```
-4. **Set Up MongoDB**
-    - Start the MongoDB server on your system.
 
-5. **Set Up MySQL using MAMP**
+4. **Set Up MySQL using MAMP**
     - Open MAMP and start the servers (Apache and MySQL).
     - Access phpMyAdmin by clicking the Open WebStart page in MAMP, then navigate to `http://localhost/phpMyAdmin`.
     - In phpMyAdmin, create a new database:
@@ -64,7 +61,7 @@ For managing your database and local web server more efficiently, consider insta
         2. Go to the Import tab.
         3. Choose the `online_store.sql` file from your project folder and click Go.
 
-6. **Run the Project**
+5. **Run the Project**
     Start the project by running:
     ```bash
     npm run start
@@ -73,9 +70,8 @@ For managing your database and local web server more efficiently, consider insta
 
 ## Technologies Used
 - **Node.js**: Server-side JavaScript runtime
-- **MongoDB**: NoSQL database
+- **Express.js**: Web application framework for Node.js
 - **EJS**: Templating engine
 - **JavaScript**: Frontend scripting
 - **CSS**: Styling
-
-You can edit this as needed to match your project's details!
+- **MAMP**: Local server environment for managing MySQL database
