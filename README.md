@@ -57,7 +57,7 @@ For managing your database and local web server more efficiently, consider insta
 5. **Run the Project**
     Start the project by running:
     ```bash
-    npm start
+    npm run start
     ```
     The application will be accessible at `http://localhost:8000` (or the specified port in your configuration).
 
