@@ -16,7 +16,7 @@
 </p>
 
 ## Description
-This project is built using Node.js, MongoDB, EJS, JavaScript, and CSS.
+This project is built using Node.js, Express.js, EJS, JavaScript, and CSS.
 
 ## Prerequisites
 Before cloning the repository, ensure you have the following installed on your system:
