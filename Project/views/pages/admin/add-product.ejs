@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/images/Costume.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/lightdark.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <title>Costume Shop</title>
+</head>
+
+<body>
+    <%- include("../../partials/top.ejs") %>
+        <%- include("../../partials/menu_admin.ejs") %>
+            <div class="container">
+                <div class="mt-5">
+                    <h1>เพิ่มสินค้า</h1>
+                    <form action="/add-product" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">ชื่อสินค้า</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="form-label">ราคา</label>
+                            <input type="text" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">รายละเอียดสินค้า</label>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="form-label">หมวดหมู่</label>
+                            <select class="form-select" aria-label="Default select example" id="category" name="category" required>
+                            <option selected>Open this select menu</option>
+                            <% for(let i = 0; i < categories.length; i++) { %>
+                                <option value="<%= categories[i].name %>"><%= categories[i].name %></option>
+                                <% } %>
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">ประเภท</label>
+                            <select class="form-select" aria-label="Default select example" id="type" name="type" required>
+                            <option selected>Open this select menu</option>
+                            <% for(let i = 0; i < types.length; i++) { %>
+                                <option value="<%= types[i].name %>"><%= types[i].name %></option>
+                                <% } %>
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fabric" class="form-label">ชนิด</label>
+                            <select class="form-select" aria-label="Default select example" id="fabric" name="fabric" required>
+                            <option selected>Open this select menu</option>
+                            <% for(let i = 0; i < fabrics.length; i++) { %>
+                                <option value="<%= fabrics[i].name %>"><%= fabrics[i].name %></option>
+                                <% } %>
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fabric" class="form-label">สีสินค้า</label>
+                            <select class="form-select" aria-label="Default select example" id="color_scheme" name="color_scheme" required>
+                            <option selected>Open this select menu</option>
+                                <option value="แดง">แดง</option>
+                                <option value="ส้ม">ส้ม</option>
+                                <option value="เหลือง">เหลือง</option>
+                                <option value="เขียวขี้ม้า">เขียวขี้ม้า</option>
+                                <option value="เขียว">เขียว</option>
+                                <option value="ฟ้า">ฟ้า</option>
+                                <option value="น้ำเงิน">น้ำเงิน</option>
+                                <option value="กรม">กรม</option>
+                                <option value="ม่วง">ม่วง</option>
+                                <option value="ชมพู">ชมพู</option>
+                                <option value="ครีม">ครีม</option>
+                                <option value="น้ำตาลอ่อน">น้ำตาลอ่อน</option>
+                                <option value="น้ำตาล">น้ำตาล</option>
+                                <option value="ดำ">ดำ</option>
+                                <option value="เทาเข้ม">เทาเข้ม</option>
+                                <option value="เทา">เทา</option>
+                                <option value="ขาว">ขาว</option>
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fabric" class="form-label">โทนสี</label>
+                            <select class="form-select" aria-label="Default select example" id="color" name="color" required>
+                            <option selected>Open this select menu</option>
+                                <option value="สดใส">สดใส</option>
+                                <option value="เข้ม">เข้ม</option>
+                                <option value="อ่อน">อ่อน</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sex" class="form-label">เพศ</label>
+                            <select class="form-select" aria-label="Default select example" id="sex" name="sex" required>
+                            <option selected>Open this select menu</option>
+                                <option value="male">ชาย</option>
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Image</label>
+                            <img id="imagePreview" src="" alt="Preview" style="max-width: 100%; max-height: 100px;">
+                            <input type="file" class="form-control" id="file" name="file" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">เพิ่มสินค้า</button>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+
+        body {
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body.light-mode {
+                background-color: #ffffff;
+                color: #333;
+            }
+
+        body.dark-mode {
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        body.light-mode .image-container {
+            background-color: #eeeeee;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body.dark-mode .image-container {
+            background-color: #1f1f1f;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        
+        body.light-mode .table-body {
+            background-color: #eeeeee;
+            color: #000000;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body.dark-mode .table-body {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .light-mode .dark-element {
+            background-color: #ffffff;
+            border-color: #000000;
+            color: #000000;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        
+        .dark-mode .dark-element {
+            background-color: #1f1f1f;
+            border-color: #ffffff;
+            color: #ffffff;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        } 
+
+        /* key คือ thead */
+        body.light-mode thead {
+            background-color: #eeeeee;
+            color: #000000;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body.dark-mode thead {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .dark-mode a.btn {
+            color: #ffffff;
+        }
+
+        /*ขอบปุ่ม*/
+        .btn-outline-light {
+            border-color: #000000 !important;
+        }
+
+        .dark-mode .btn-outline-light {
+            border-color: #ffffff;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #cacaca;
+            border-color: #000000;
+            color: #000000;
+        }
+
+        .dark-mode .btn-outline-light:hover {
+            background-color: #000000;
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .text-no-change-color {
+            color: #ffffff !important; 
+        }
+
+        .custom-btn {
+            color: #D4403A !important;
+        }
+        
+        .green-btn {
+            color: #3A833A !important;
+        }
+
+        .black-bth {
+            color:#000000 !important;
+        }
+  
+        /* Light mode button text color */
+        @media (prefers-color-scheme: light) {
+            .btn-fabric {
+                color: #ffffff;
+            }
+        }
+  
+        /* Dark mode button text color */
+        @media (prefers-color-scheme: dark) {
+            .btn-fabric {
+                color: #000000;
+            }
+        }
+  

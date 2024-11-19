@@ -1,0 +1,115 @@
+<body class="light-mode">
+    <button id="themeToggleBtn" class="btn btn-outline-light ml-auto" onclick="toggleTheme()">
+      <span id="toggle-icon">
+        <i class="fas fa-sun black-bth" id="sun-icon" aria-hidden="true" onclick="setThemeIcon('sun')"></i>
+        <i class="fas fa-moon black-bth" id="moon-icon" aria-hidden="true" onclick="setThemeIcon('moon')" style="display: inline-block;"></i>
+      </span>
+    </button>
+
+    <script>
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const sunIcon = document.getElementById('sun-icon');
+      const moonIcon = document.getElementById('moon-icon');
+
+      function toggleTheme() {
+        const body = document.body;
+        const isLightMode = body.classList.contains('light-mode');
+
+        if (isLightMode) {
+          body.classList.remove('light-mode');
+          body.classList.add('dark-mode');
+          saveThemePreference('dark');
+        } else {
+          body.classList.remove('dark-mode');
+          body.classList.add('light-mode');
+          saveThemePreference('light');
+        }
+
+        toggleIcons(!isLightMode);
+      }
+
+      function toggleIcons(isDarkMode) {
+        if (isDarkMode) {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'inline-block';
+        } else {
+          sunIcon.style.display = 'inline-block';
+          moonIcon.style.display = 'none';
+        }
+      }
+
+      function saveThemePreference(theme) {
+        localStorage.setItem('themePreference', theme);
+      }
+
+      function setThemeIcon(icon) {
+        localStorage.setItem('iconPreference', icon);
+        toggleIcons(icon === 'moon');
+      }
+
+      function loadThemePreference() {
+        return localStorage.getItem('themePreference');
+      }
+
+      function loadIconPreference() {
+        return localStorage.getItem('iconPreference');
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const savedTheme = loadThemePreference();
+        const body = document.body;
+
+        if (savedTheme === 'dark') {
+          body.classList.add('dark-mode');
+          toggleIcons(true);
+        }
+      });
+      
+      function previewImage(input) {
+          const imagePreview = document.getElementById('imagePreview');
+          if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+          } else {
+            imagePreview.src = "";
+          }
+        }
+        function updateImagePreview(input) {
+          const newImagePreview = document.getElementById('newImagePreview');
+          if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                newImagePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+          } else {
+            newImagePreview.src = '';
+          }
+        }
+
+        const newImageInput = document.getElementById('newImageInput');
+        newImageInput.addEventListener('change', function () {
+          updateImagePreview(this);
+        });
+
+        // JavaScript function to update button text based on the mode
+        function updateButtonTextColor() {
+            var button = document.getElementById("type_of_fabric");
+  
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // Dark mode
+                button.style.color = "white";
+            } else {
+                // Light mode
+                button.style.color = "black";
+            }
+        }
+
+        // Call the function when the page loads
+        window.onload = updateButtonTextColor;
+
+    </script>
+</body>

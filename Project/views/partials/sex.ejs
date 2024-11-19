@@ -1,0 +1,81 @@
+<div style="display: flex;" class="mt-2">
+    <div class="nav-item">
+        <button type="button" class="btn btn-outline-success me-2" onclick="click_update('male')" id="male">
+                                    ชาย
+                                </button>
+    </div>
+    <!-- <div class="nav-item">
+        <button type="button" class="btn btn-outline-success me-2" onclick="click_update('female')" id="female">
+                                    หญิง
+                                </button>
+    </div>
+    <div class="nav-item">
+        <button type="button" class="btn btn-outline-success me-2" onclick="click_update('unisex')" id="unisex">
+                                    ไม่จำกัดเพศ
+                                </button>
+    </div>
+    <div class="nav-item">
+        <button type="button" class="btn btn-outline-success me-2" onclick="click_update('all')" id="all">
+                                    ทั้งหมด
+                                </button>
+    </div> -->
+</div>
+
+<script>
+    if (localStorage.getItem("sex") == null) {
+        localStorage.setItem("sex", "all");
+    }
+
+    let s = localStorage.getItem("sex");
+    update(s);
+
+    function update(e) {
+        let name = e;
+        localStorage.setItem("sex", name);
+        let sex = localStorage.getItem("sex");
+
+        if (sex == "male") {
+            document.getElementById("female").className = "btn btn-outline-success me-2";
+            document.getElementById("unisex").className = "btn btn-outline-success me-2";
+            document.getElementById("all").className = "btn btn-outline-success me-2";
+            document.getElementById("male").className = "btn btn-success me-2";
+        } else if (sex == "female") {
+            document.getElementById("male").className = "btn btn-outline-success me-2";
+            document.getElementById("unisex").className = "btn btn-outline-success me-2";
+            document.getElementById("all").className = "btn btn-outline-success me-2";
+            document.getElementById("female").className = "btn btn-success me-2";
+        } else if (sex == "unisex") {
+            document.getElementById("male").className = "btn btn-outline-success me-2";
+            document.getElementById("female").className = "btn btn-outline-success me-2";
+            document.getElementById("all").className = "btn btn-outline-success me-2";
+            document.getElementById("unisex").className = "btn btn-success me-2";
+        } else if (sex == "all") {
+            document.getElementById("male").className = "btn btn-outline-success me-2";
+            document.getElementById("female").className = "btn btn-outline-success me-2";
+            document.getElementById("unisex").className = "btn btn-outline-success me-2";
+            document.getElementById("all").className = "btn btn-success me-2";
+
+        }
+    }
+
+    function click_update(e) {
+        let name = e;
+        localStorage.setItem("sex", name);
+        let sex = localStorage.getItem("sex");
+
+        if (sex == "male") {
+            document.getElementById("female").className = "btn btn-outline-success me-2";
+            document.getElementById("unisex").className = "btn btn-outline-success me-2";
+            document.getElementById("male").className = "btn btn-success me-2";
+        } else if (sex == "female") {
+            document.getElementById("male").className = "btn btn-outline-success me-2";
+            document.getElementById("unisex").className = "btn btn-outline-success me-2";
+            document.getElementById("female").className = "btn btn-success me-2";
+        } else if (sex == "unisex") {
+            document.getElementById("male").className = "btn btn-outline-success me-2";
+            document.getElementById("female").className = "btn btn-outline-success me-2";
+            document.getElementById("unisex").className = "btn btn-success me-2";
+        }
+        window.location.reload();
+    }
+</script>

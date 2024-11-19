@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/images/Costume.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/lightdark.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <title>Costume Shop</title>
+
+</head>
+
+<body>
+    <%- include("./partials/top.ejs") %>
+        <%- include("./partials/navbar.ejs") %>
+            <div class="container mt-3">
+                <div style="width: 100%;overflow-x: scroll;display: flex;">
+                    <% for(let i=0; i < category.length; i++) { %>
+                        <button type="button" id="category" onclick="update_category('<%= category[i].name %>')" class="btn btn-fabric me-2">
+                        <%= category[i].name %>
+                    </button>
+                        <% } %>
+                </div>
+                <div style="width: 100%;overflow-x: scroll;display: flex;margin-top: 1rem;" id="color_select">
+                    <button type="button" onclick="update_color_select('สดใส')" class="btn btn-fabric me-2" id="color_s">สดใส</button>
+                    <button type="button" onclick="update_color_select('เข้ม')" class="btn btn-fabric me-2" id="color_s">เข้ม</button>
+                    <button type="button" onclick="update_color_select('อ่อน')" class="btn btn-fabric me-2" id="color_s">อ่อน</button>
+                </div>
+
+                <%- include("./partials/sex.ejs") %>
+                    <hr>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="mt-2 pt-4">
+                            <h4 class="text-center">ชนิด</h4>
+                            <% for(let i=0; i < type_of_fabric.length; i++) { %>
+                                <button type="type_of_fabric" id="type_of_fabric" onclick="update_type_of_fabric('<%= type_of_fabric[i].name %>')" class="btn btn-fabric m-1" style="width: 100%;">
+                                        <%= type_of_fabric[i].name %>
+                                    </button>
+                                <% } %>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row mt-2">
+                            <% for(let i=0; i < products.length; i++) { %>
+                                <div class="col-3 p-4" id="product" style="height: 100%;">
+                                    <input type="text" id="sex" value="<%= products[i].sex %>" hidden>
+                                    <input type="text" id="category_pro" value="<%= products[i].category %>" hidden>
+                                    <input type="text" id="type_of_fabric_pro" value="<%= products[i].type_of_fabric %>" hidden>
+                                    <input type="text" id="color_pro" value="<%= products[i].color %>" hidden>
+                                    <a href="/product/<%= products[i].id %>">
+                                        <img src="<%= products[i].image %>" width="100%" alt="">
+                                    </a>
+                                    <h3 class="mt-2">
+                                        <%= products[i].name %>
+                                    </h3>
+                                    <h5>ราคา <%= products[i].price.toLocaleString() %> บาท</h5>
+                                    <% if(username != '') { %>
+                                        <a class="btn btn-warning btn-rounded" href="/insertcart/<%= products[i].id %>">เพิ่มลงตะกร้า</a>
+                                        <% } %>
+                                </div>
+                                <% }; %>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                const show_product = () => {
+                    let sex = localStorage.getItem("sex");
+                    let category = localStorage.getItem("category");
+                    let type_of_fabric = localStorage.getItem("type_of_fabric");
+                    let color = localStorage.getItem("color_select");
+                    if (sex != "all") {
+                        let product = document.querySelectorAll("#product");
+                        for (let i = 0; i < product.length; i++) {
+                            if (product[i].querySelector("#sex").value != sex) {
+                                product[i].style.display = "none";
+                            }
+                        }
+                    }
+                    if (category != null) {
+                        let product = document.querySelectorAll("#product");
+                        for (let i = 0; i < product.length; i++) {
+                            if (product[i].querySelector("#category_pro").value != category) {
+                                product[i].style.display = "none";
+                            }
+                        }
+                        document.getElementById("color_select").hidden = false;
+                    } else {
+                        document.getElementById("color_select").hidden = true;
+                        localStorage.removeItem("color_select");
+                    }
+
+                    if (type_of_fabric != null) {
+                        let product = document.querySelectorAll("#product");
+                        for (let i = 0; i < product.length; i++) {
+                            if (product[i].querySelector("#type_of_fabric_pro").value != type_of_fabric) {
+                                product[i].style.display = "none";
+                            }
+                        }
+                    }
+
+                    if (color != null) {
+                        let product = document.querySelectorAll("#product");
+                        for (let i = 0; i < product.length; i++) {
+                            if (product[i].querySelector("#color_pro").value != color) {
+                                product[i].style.display = "none";
+                            }
+                        }
+                    }
+                };
+
+                const update_color_select = (e) => {
+                    let colors = document.querySelectorAll("#color_s");
+                    if (e == localStorage.getItem("color_select")) {
+                        localStorage.removeItem("color_select");
+                        for (let i = 0; i < colors.length; i++) {
+                            colors[i].classList.remove("btn-secondary");
+                            colors[i].classList.add("btn-outline-secondary");
+                        }
+
+                    } else {
+                        for (let i = 0; i < colors.length; i++) {
+                            if (e == colors[i].innerText) {
+                                colors[i].classList.add("btn-secondary");
+                                localStorage.setItem("color_select", e);
+                            } else {
+                                colors[i].classList.remove("btn-secondary");
+                                colors[i].classList.add("btn-outline-secondary");
+                            }
+
+                        }
+                    }
+                    window.location.reload();
+                };
+
+
+                const check_color = () => {
+                    let color = localStorage.getItem("color_select");
+                    let color_s = document.querySelectorAll("#color_s");
+                    if (color != null) {
+                        for (let i = 0; i < color_s.length; i++) {
+                            if (color == color_s[i].innerText) {
+                                color_s[i].classList.add("btn-secondary");
+                            } else {
+                                color_s[i].classList.remove("btn-secondary");
+                                color_s[i].classList.add("btn-outline-secondary");
+                            }
+                        }
+                    } else {
+                        for (let i = 0; i < color_s.length; i++) {
+                            color_s[i].classList.remove("btn-secondary");
+                            color_s[i].classList.add("btn-outline-secondary");
+                        }
+                    }
+
+                };
+
+
+                const update_type_of_fabric = (e) => {
+                    let type_of_fabric = document.querySelectorAll("#type_of_fabric");
+                    if (e == localStorage.getItem("type_of_fabric")) {
+                        localStorage.removeItem("type_of_fabric");
+                        for (let i = 0; i < type_of_fabric.length; i++) {
+                            type_of_fabric[i].classList.remove("btn-secondary");
+                            type_of_fabric[i].classList.add("btn-outline-secondary");
+                        }
+                    } else {
+                        for (let i = 0; i < type_of_fabric.length; i++) {
+                            if (e == type_of_fabric[i].innerText) {
+                                type_of_fabric[i].classList.add("btn-secondary");
+                                localStorage.setItem("type_of_fabric", e);
+                            } else {
+                                type_of_fabric[i].classList.remove("btn-secondary");
+                                type_of_fabric[i].classList.add("btn-outline-secondary");
+                            }
+                        }
+                    }
+                    window.location.reload();
+                };
+
+                const check_type_of_fabric = () => {
+                    let type_of_fabric = document.querySelectorAll("#type_of_fabric");
+                    if (localStorage.getItem("type_of_fabric") != null) {
+                        for (let i = 0; i < type_of_fabric.length; i++) {
+                            if (localStorage.getItem("type_of_fabric") == type_of_fabric[i].innerText) {
+                                type_of_fabric[i].classList.add("btn-secondary");
+                            } else {
+                                type_of_fabric[i].classList.remove("btn-secondary");
+                                type_of_fabric[i].classList.add("btn-outline-secondary");
+                            }
+                        }
+                    } else {
+                        for (let i = 0; i < type_of_fabric.length; i++) {
+                            type_of_fabric[i].classList.remove("btn-secondary");
+                            type_of_fabric[i].classList.add("btn-outline-secondary");
+                        }
+                    }
+                }
+
+                const update_category = (e) => {
+                    let category = document.querySelectorAll("#category");
+                    if (e == localStorage.getItem("category")) {
+                        localStorage.removeItem("category");
+                        for (let i = 0; i < category.length; i++) {
+                            category[i].classList.remove("btn-secondary");
+                            category[i].classList.add("btn-outline-secondary");
+                        }
+                    } else {
+                        for (let i = 0; i < category.length; i++) {
+                            if (e == category[i].innerText) {
+                                category[i].classList.add("btn-secondary");
+                                localStorage.setItem("category", e);
+                            } else {
+                                category[i].classList.remove("btn-secondary");
+                                category[i].classList.add("btn-outline-secondary");
+                            }
+                        }
+                    }
+                    window.location.reload();
+                };
+
+                const check_category = () => {
+                    let category = document.querySelectorAll("#category");
+                    if (localStorage.getItem("category") != null) {
+                        for (let i = 0; i < category.length; i++) {
+                            if (localStorage.getItem("category") == category[i].innerText) {
+                                category[i].classList.remove("btn-outline-secondary");
+                                category[i].classList.add("btn-secondary");
+                            } else {
+                                category[i].classList.add("btn-outline-secondary");
+                            }
+                        }
+                    } else {
+                        for (let i = 0; i < category.length; i++) {
+                            category[i].classList.add("btn-outline-secondary");
+                        }
+                    }
+                };
+
+                check_category();
+                check_type_of_fabric();
+                check_color();
+                show_product();
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>

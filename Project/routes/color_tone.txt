@@ -1,0 +1,34 @@
+"ดำ": ["ดำ", "ครีม", "ขาว", "เทา", "น้ำตาลอ่อน", "เทาเข้ม"],
+"แดง": ["ขาว", "ครีม", "ชมพู"],
+"เขียว": ["ขาว", "ครีม", "เหลือง"],
+"เหลือง": ["ขาว", "ครีม", "เขียว"],
+"ม่วง": ["ขาว", "ชมพู", "ครีม", "ฟ้า"],
+"น้ำเงิน": ["ขาว", "ชมพู", "ครีม", "ฟ้า"],
+"ฟ้า": ["ขาว", "ชมพู", "ครีม", "น้ำเงิน"],
+"ชมพู": ["ขาว", "แดง", "ครีม", "ฟ้า"],
+"ขาว": ["ขาว", "ชมพู", "ครีม", "ฟ้า", "น้ำตาลอ่อน", "น้ำเงิน", "เทา"],
+"น้ำตาลอ่อน": ["ขาว", "ครีม", "ดำ"],
+"กรม": ["ครีม", "ดำ", "ขาว"],
+"เทา": ["ขาว", "ดำ", "ครีม"],
+"เขียวขี้ม้า": ["ดำ", "น้ำตาล", "ครีม", "เทา"],
+"เทาเข้ม": ["ดำ", "ครีม", "น้ำตาล"],
+"น้ำตาล": ["ขาว", "ดำ", "ครีม", "เขียวขี้ม้า"],
+"ครีม": ["น้ำตาลอ่อน", "เทา", "ขาว", "ดำ"],
+"ส้ม": ["ขาว", "ดำ", "ครีม"]
+
+<div class="mb-3">
+    <label for="color_scheme" class="form-label">สีสินค้า</label>
+    <select class="form-select" aria-label="Default select example" id="color_scheme" name="color_scheme" required>
+        <% colorRoute.colors.forEach(color => { %>
+            <option value="<%= color %>" <%= product[0].color_scheme === color ? 'selected' : '' %>><%= color %></option>
+        <% }); %>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="color" class="form-label">โทนสี</label>
+    <select class="form-select" aria-label="Default select example" id="color" name="color" required>
+        <% colorRoute.tones.forEach(tone => { %>
+            <option value="<%= tone %>" <%= product[0].color === tone ? 'selected' : '' %>><%= tone %></option>
+        <% }); %>
+    </select>
+</div>
