@@ -51,10 +51,20 @@ For managing your database and local web server more efficiently, consider insta
     npm install
     ```
 4. **Set Up MongoDB**
-    - Install MongoDB from [here](https://www.mongodb.com/try/download/community).
     - Start the MongoDB server on your system.
-    
-5. **Run the Project**
+
+5. **Set Up MySQL using MAMP**
+    - Open MAMP and start the servers (Apache and MySQL).
+    - Access phpMyAdmin by clicking the Open WebStart page in MAMP, then navigate to `http://localhost/phpMyAdmin`.
+    - In phpMyAdmin, create a new database:
+        1. Click on the Databases tab.
+        2. Enter a name for the database (e.g., `online_store`) and click Create.
+    - Import the `online_store.sql` file into the new database:
+        1. Click on the database you just created from the list.
+        2. Go to the Import tab.
+        3. Choose the `online_store.sql` file from your project folder and click Go.
+
+6. **Run the Project**
     Start the project by running:
     ```bash
     npm run start
